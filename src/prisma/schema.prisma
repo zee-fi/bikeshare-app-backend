@@ -29,9 +29,9 @@ model Bike {
 
 model Booking {
   id String @id @default(cuid())
-  totalPrice Float
   startDate DateTime
   endDate DateTime
+  totalPrice Float
 
   bikeId String
   bike Bike @relation(fields: [bikeId], references: [id])
