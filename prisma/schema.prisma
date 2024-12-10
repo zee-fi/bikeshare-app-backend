@@ -12,3 +12,26 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Bike {
+  id String @id @default(cuid())
+  title String
+  tags String[]
+  description String
+  price Float
+  deposit Float?
+  image String
+  owner String
+
+  bookings Booking[]
+}
+
+model Booking {
+  id String @id @default(cuid())
+  startDate DateTime
+  endDate DateTime
+  totalPrice Float
+
+  bikeId String
+  bike Bike @relation(fields: [bikeId], references: [id])
+}
