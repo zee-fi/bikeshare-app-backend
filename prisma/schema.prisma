@@ -13,15 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Tag {
+  City_Bike
+  E_Bike
+  Road_Bike
+  Touring_Bike
+  Mountain_Bike
+  Mens
+  Womens
+  Unisex
+  Kids
+}
+
 model Bike {
   id String @id @default(cuid())
   title String
-  tags String[]
   description String
+  tags Tag[]
   price Float
   deposit Float?
-  image String
-  owner String
+  image String?
+  owner String?
 
   bookings Booking[]
 }

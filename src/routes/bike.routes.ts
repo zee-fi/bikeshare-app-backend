@@ -19,12 +19,12 @@ router.post(
         tags,
         description,
         price,
-        deposit,
-        image,
-        owner,
+        deposit: deposit || null,
+        image: image || null,
+        owner: owner || null,
       };
 
-      const respose = await prisma.bike.create({ data: newBike });
+      const response = await prisma.bike.create({ data: newBike });
       res.status(201).json(response);
     } catch (err) {
       console.log("error creating bike", err);
