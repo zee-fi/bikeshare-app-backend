@@ -10,9 +10,9 @@ import { Request, Response, NextFunction } from "express";
 router.post(
   "/bikes",
   async (req: Request, res: Response, next: NextFunction) => {
+    const { title, tags, description, price, deposit, image, owner } =
+    req.body;
     try {
-      const { title, tags, description, price, deposit, image, owner } =
-        req.body;
 
       const newBike = {
         title,
@@ -25,7 +25,7 @@ router.post(
       };
 
       const response = await prisma.bike.create({ data: newBike });
-      res.status(201).json(response);
+      res.status(201).json(newBike);
     } catch (err) {
       console.log("error creating bike", err);
       res.status(500).json({ message: "error creating bike" });
@@ -97,7 +97,7 @@ router.put("/bikes/:bikeId", async (req, res, next): Promise<any> => {
 router.delete("/bikes/:bikeId", async (req, res, next) => {
   try {
     const deletedBike = await prisma.bike.delete({
-      where: { id: req.params.bikeId }
+      where: { id: req.params.bikeId },
     });
     res.json(deletedBike);
   } catch (err) {
