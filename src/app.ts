@@ -6,12 +6,18 @@ require("dotenv").config();
 // https://www.npmjs.com/package/express
 import express from "express";
 
+import cors from 'cors';
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
 // 👇 Start handling routes here
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
+
 import indexRoutes from "./routes/index.routes";
 app.use("/api", indexRoutes);
 
