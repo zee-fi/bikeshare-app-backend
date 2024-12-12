@@ -13,23 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Tag {
-  City_Bike
-  E_Bike
-  Road_Bike
-  Touring_Bike
-  Mountain_Bike
-  Mens
-  Womens
-  Unisex
-  Kids
-}
-
 model Bike {
   id String @id @default(cuid())
   title String
   description String
-  tags Tag[]
+  tags String[]
   price Float
   deposit Float?
   image String?
