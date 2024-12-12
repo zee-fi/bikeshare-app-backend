@@ -1,6 +1,7 @@
 // ℹ️ Gets access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
 require("dotenv").config();
+import prisma from "./db";
 
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
@@ -23,6 +24,16 @@ app.use(cors({
 app.use(express.json());
 app.options('*', cors());
 
+app.get("/test-db", async (req, res) => {
+    try {
+      const testQuery = await prisma.bike.findMany();
+      res.status(200).json(testQuery);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
+
 import indexRoutes from "./routes/index.routes";
 app.use("/api", indexRoutes);
 
@@ -35,4 +46,4 @@ app.use("/api", bookingRoutes);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
-module.exports = app;
+export default app;
