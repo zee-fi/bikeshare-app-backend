@@ -5,8 +5,10 @@ import { RequestCreateBooking } from '../types/requests';
 const router = express.Router();
 
 
+//////  CREATE  //////
+
 router.post(
-  "/booking/:bikeId",
+  "/bookings/:bikeId",
   async (req: RequestCreateBooking, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { startDate, endDate } = req.body;
@@ -41,5 +43,24 @@ router.post(
     }
   }
 );
+
+
+//////  READ  //////
+
+router.get("/bookings/:bookingId", async (req, res, next): Promise<any> => {
+    try {
+      const booking = await prisma.booking.findUnique({
+        where: { id: req.params.bookingId},
+      });
+      if(!booking) {
+        return res.status(404).json({ message: "Booking not found"});
+      } else {
+        return res.status(200).json(booking);
+      } 
+    } catch (err) {
+      console.log("error fetching booking from DB", err);
+      res.status(500).json({message: "error fetching booking from DB"});
+    }
+});
 
 export default router;
