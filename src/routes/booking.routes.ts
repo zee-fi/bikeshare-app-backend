@@ -8,7 +8,7 @@ const router = express.Router();
 //////  CREATE  //////
 
 router.post(
-  "/booking/:bikeId",
+  "/bookings/:bikeId",
   async (req: RequestCreateBooking, res: Response, next: NextFunction): Promise<any> => {
     try {
       const { startDate, endDate } = req.body;
