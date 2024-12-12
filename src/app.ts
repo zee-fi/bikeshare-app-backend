@@ -16,10 +16,11 @@ require("./config")(app);
 // 👇 Start handling routes here
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://bikeshare-berlin.netlify.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-}));
+  }));
+  
 
 app.use(express.json());
 app.options('*', cors());
