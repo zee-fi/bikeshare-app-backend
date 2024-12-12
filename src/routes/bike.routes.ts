@@ -16,10 +16,10 @@ router.post(
 
       const newBike = {
         title,
-        tags,
         description,
-        price,
-        deposit: deposit || null,
+        tags,
+        price: parseFloat(price),
+        deposit: deposit ? parseFloat(deposit) : null,
         image: image || null,
         owner: owner || null,
       };
