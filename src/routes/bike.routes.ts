@@ -63,7 +63,7 @@ router.get("/bikes/:bikeId", async (req, res, next): Promise<any> => {
 
 //////  UPDATE  //////
 
-router.put("/bikes/:bikeId", async (req, res, next): Promise<any> => {
+router.put("/updateBike/:bikeId", async (req, res, next): Promise<any> => {
   try {
     const { title, tags, description, price, deposit, image, owner } = req.body;
 
