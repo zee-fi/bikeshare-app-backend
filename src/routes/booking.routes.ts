@@ -39,6 +39,9 @@ router.post(
     } catch (err) {
       console.log("error creating bike", err);
       next(err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: "Failed to create booking" });
+      }
       return res.status(500).json({ message: "Error creating booking" });
     }
   }
